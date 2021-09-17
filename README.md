@@ -3,6 +3,7 @@
 A script to help you donwload things from rsync.kemono.party easily
 
 ## Usage
+```sh
 Download via rsync contents of specific creators from rsync.kemono.party
         Usage: krsync -h
         krsync --SERVICE --id <creator id> [ --dest <destination_dir> ]
@@ -17,3 +18,4 @@ Download via rsync contents of specific creators from rsync.kemono.party
                 --fantia, used when downloading a fantia creator
                 --fanbox, used when downloading a fanbox creator
                 --gumroad, used when downloading a gumroad creator
+```
