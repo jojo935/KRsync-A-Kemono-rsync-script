@@ -2,7 +2,7 @@
 
 A script to help you donwload things from rsync.kemono.party easily
 
-##Usage
+## Usage
 Download via rsync contents of specific creators from rsync.kemono.party
         Usage: krsync -h
         krsync --SERVICE --id <creator id> [ --dest <destination_dir> ]
