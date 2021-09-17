@@ -1,15 +1,19 @@
-# Usah-s-Kemono-rsync-scripts
-Some scripts I made that will allow people with minimum knowledge in using rsync and Bash to utilize kemono.party's rsync service.
+# KRsync
 
+A script to help you donwload things from rsync.kemono.party easily
 
-# Instructions
-You must edit the output directory listed in the files to the directory which you would like to use. This can be easily done in any text editor.
+##Usage
+Download via rsync contents of specific creators from rsync.kemono.party
+        Usage: krsync -h
+        krsync --SERVICE --id <creator id> [ --dest <destination_dir> ]
 
-# How to use
-* 1: Edit the output directory in the text editor of your choosing
-* 2: Place scripts wherever you find most useful
-* 3: Open Terminal and cd into that folder
-* 4: Run the script like so: ~$ ./script.sh ( ./Patreon.sh for example)
-* 5: Input the ID of the user/discord and press enter
-* 6: ???
-* 7: Profit
+        --dest <destination_dir>, destination where you want the downloaded content to go
+
+        The <creator id> is the number at the end of the URL on any given creator's page
+
+        SERVICE:
+                --patreon, used when downloading a patreon creator
+                --subscribestar, used when downloading a subscribestar creator
+                --fantia, used when downloading a fantia creator
+                --fanbox, used when downloading a fanbox creator
+                --gumroad, used when downloading a gumroad creator

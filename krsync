@@ -1,0 +1,74 @@
+#!/bin/sh
+
+name='krsync'
+rsync_binary='rsync'
+default_rysnc_args='-4ahmvz --ignore-existing --progress --no-motd --info=progress2 --no-D --no-g --no-o --no-p --exclude=*.clip --exclude=*.psd --exclude=*.sai'
+additional_rsync_args=''
+rsync_domain='rsync.kemono.party'
+service_base_url="rsync://$rsync_domain/kemono/attachments"
+used_url=''
+service=''
+id=''
+dest=''
+service_set=0
+
+help() {
+cat <<- _end_help_message
+Download via rsync contents of specific creators from $rsync_domain
+        Usage: $name -h
+        $name --SERVICE --id <creator id> [ --dest <destination_dir> ]
+
+        --dest <destination_dir>, destination where you want the downloaded content to go
+
+        The <creator id> is the number at the end of the URL on any given creator's page
+
+        SERVICE:
+                --patreon, used when downloading a patreon creator
+                --subscribestar, used when downloading a subscribestar creator
+                --fantia, used when downloading a fantia creator
+                --fanbox, used when downloading a fanbox creator
+                --gumroad, used when downloading a gumroad creator
+_end_help_message
+}
+
+while [ "$1" ]; do
+                case "$1" in
+                        --help | -h )
+                                help; exit 0;;
+                        --subscribestar )
+                                service='subscribestar'; service_set=1 ; shift; continue ;;
+                        --fantia )
+                                service='fantia'; service_set=1 ; shift; continue ;;
+                        --fanbox )
+                                service='fanbox'; service_set=1 ; shift; continue ;;
+                        --patreon )
+                                service_set=1 ; shift; continue ;;
+                        --discord )
+                                service_set=1 ; shift; continue ;;
+                        --gumroad )
+                                service='gumroad'; service_set=1 ; shift; continue ;;
+                        --id )
+                                shift; id="$1"; shift; continue ;;
+                        --dest )
+                                shift; dest="$1"; shift; continue ;;
+                        * )
+                                additional_rsync_args="$additional_rsync_args $1"; shift; continue ;;
+                esac
+done
+
+if [ -z "$id" ]; then
+        printf "Please specify an id with the --id flag\n"; exit 1;
+fi
+
+if [ "$service_set" = 0 ]; then
+        printf "Please specify a service\n"; exit 1;
+fi
+
+if [ -z "$dest" ]; then
+        printf "No destination set. Defaulting to using the current working directory\n"
+        dest='.'
+fi
+
+used_url="$service_base_url/$service/$id"
+
+exec $rsync_binary $default_rysnc_args $additional_rsync_args $used_url $dest
