@@ -5,7 +5,7 @@ rsync_binary='rsync'
 default_rysnc_args='-4ahmvz --ignore-existing --progress --no-motd --info=progress2 --no-D --no-g --no-o --no-p --exclude=*.clip --exclude=*.psd --exclude=*.sai'
 additional_rsync_args=''
 rsync_domain='rsync.kemono.party'
-service_base_url="rsync://$rsync_domain/kemono/attachments"
+service_base_url="rsync://$rsync_domain/kemono/data/attachments"
 used_url=''
 service=''
 id=''
